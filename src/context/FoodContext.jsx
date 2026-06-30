@@ -11,7 +11,7 @@ const FoodContext = createContext(null);
 // Key untuk localStorage
 const STORAGE_KEY = 'carimakan_local_foods';
 const VERSION_KEY = 'carimakan_data_version';
-const CURRENT_VERSION = 'v2'; // naikkan versi ini setiap kali data awal berubah
+const CURRENT_VERSION = 'v3'; // naikkan versi ini setiap kali data awal berubah
 
 // Data sample awal jika localStorage kosong
 const INITIAL_FOODS = [
@@ -35,7 +35,7 @@ const INITIAL_FOODS = [
     origin: 'Madura',
     price: 'Rp30.000',
     priceRaw: 30000,
-    image: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=500&auto=format&fit=crop&q=60',
+    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&auto=format&fit=crop&q=60',
     instructions: 'Sate ayam pilihan dibakar di atas arang hingga kecoklatan. Sajikan dengan bumbu kacang khas Madura yang gurih manis, potongan bawang merah, dan lontong hangat.',
     ingredients: ['250g Daging Ayam Fillet', '100g Kacang Tanah Goreng', '2 sdm Kecap Manis', '3 siung Bawang Merah', '2 siung Bawang Putih', '1 buah Lontong'],
     isLocal: true,
