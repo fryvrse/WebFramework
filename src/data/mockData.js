@@ -11,7 +11,7 @@ export const mockData = [
     category: "Makanan Utama",
     origin: "Indonesia",
     price: "Rp25.000",
-    image: "https://images.unsplash.com/photo-1612240498936-65f5101365d2?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=500&auto=format&fit=crop&q=60",
     description: "Nasi goreng khas Nusantara dengan paduan bumbu rempah tradisional, disajikan dengan telur mata sapi, kerupuk renyah, dan acar segar."
   },
   {
@@ -29,7 +29,7 @@ export const mockData = [
     category: "Makanan Utama",
     origin: "Minangkabau",
     price: "Rp40.000",
-    image: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1625943553852-781c6dd46faa?w=500&auto=format&fit=crop&q=60",
     description: "Daging sapi empuk yang dimasak perlahan dalam santan kental dan rempah-rempah kaya rasa selama berjam-jam hingga bumbunya meresap sempurna."
   },
   {
@@ -38,7 +38,7 @@ export const mockData = [
     category: "Makanan Utama",
     origin: "Solo",
     price: "Rp18.000",
-    image: "https://images.unsplash.com/photo-1596797882942-f4112271df62?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500&auto=format&fit=crop&q=60",
     description: "Bakso sapi urat kenyal disajikan dalam kuah kaldu sapi bening super gurih, lengkap dengan mi kuning, bihun, tahu basah, dan taburan seledri."
   },
   {
@@ -74,7 +74,7 @@ export const mockData = [
     category: "Camilan",
     origin: "Bandung",
     price: "Rp35.000",
-    image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&auto=format&fit=crop&q=60",
     description: "Terang bulan tebal bertekstur lembut bersarang dengan topping melimpah mentega premium, cokelat meises, kacang sangrai, wijen, dan keju parut."
   }
 ];
