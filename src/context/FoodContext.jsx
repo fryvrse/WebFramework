@@ -10,6 +10,8 @@ const FoodContext = createContext(null);
 
 // Key untuk localStorage
 const STORAGE_KEY = 'carimakan_local_foods';
+const VERSION_KEY = 'carimakan_data_version';
+const CURRENT_VERSION = 'v2'; // naikkan versi ini setiap kali data awal berubah
 
 // Data sample awal jika localStorage kosong
 const INITIAL_FOODS = [
@@ -20,7 +22,7 @@ const INITIAL_FOODS = [
     origin: 'Indonesia',
     price: 'Rp25.000',
     priceRaw: 25000,
-    image: 'https://images.unsplash.com/photo-1612240498936-65f5101365d2?w=500&auto=format&fit=crop&q=60',
+    image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=500&auto=format&fit=crop&q=60',
     instructions: 'Nasi goreng khas Nusantara dengan bumbu rempah pilihan. Tumis bawang merah, bawang putih, cabai. Masukkan nasi, aduk rata dengan kecap manis dan garam. Sajikan dengan telur mata sapi dan kerupuk.',
     ingredients: ['300g Nasi Putih Dingin', '1 butir Telur', '2 siung Bawang Merah', '1 siung Bawang Putih', '1 sdm Kecap Manis', 'Secukupnya Garam & Merica'],
     isLocal: true,
@@ -48,6 +50,13 @@ export const FoodProvider = ({ children }) => {
   // Inisialisasi state dari localStorage, atau gunakan data sample jika kosong
   const [localFoods, setLocalFoods] = useState(() => {
     try {
+      // Cek versi data — jika versi lama, reset ke INITIAL_FOODS terbaru
+      const storedVersion = localStorage.getItem(VERSION_KEY);
+      if (storedVersion !== CURRENT_VERSION) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.setItem(VERSION_KEY, CURRENT_VERSION);
+        return INITIAL_FOODS;
+      }
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
@@ -58,6 +67,7 @@ export const FoodProvider = ({ children }) => {
       return INITIAL_FOODS;
     }
   });
+
 
   // Simpan ke localStorage setiap kali localFoods berubah
   useEffect(() => {
