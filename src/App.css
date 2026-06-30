@@ -1,0 +1,321 @@
+/**
+ * App.css
+ * Layout utama aplikasi CariMakan, konfigurasi responsif grid, loading spinner, dan modal detail.
+ */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f3f4f6; /* Abu muda */
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.main-content {
+  flex-grow: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem 1.5rem;
+  box-sizing: border-box;
+}
+
+/* --- Responsive Grid Makanan --- */
+.food-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* Desktop: 4 Kolom */
+}
+
+/* Tablet Layout (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Tablet: 2 Kolom */
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile Layout (max-width: 640px) */
+@media (max-width: 640px) {
+  .food-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr)); /* Mobile: 1 Kolom */
+    gap: 1.25rem;
+  }
+  .main-content {
+    padding: 0 1rem 3rem 1rem;
+  }
+}
+
+/* --- Container Status (Loading / Empty State) --- */
+.status-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1rem;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e5e7eb;
+}
+
+.loading-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-top: 1.25rem;
+}
+
+/* Spinner Loading */
+.spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #22c55e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Empty State (Makanan Tidak Ditemukan) */
+.empty-state {
+  border: 1px dashed #d1d5db;
+  background: transparent;
+  box-shadow: none;
+}
+
+.empty-icon {
+  width: 4rem;
+  height: 4rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-subtext {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* --- Modal Detail Makanan --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1.5rem;
+}
+
+.modal-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Animasi Zoom untuk Modal */
+.animate-zoom {
+  animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.modal-close-btn:hover {
+  background-color: #ef4444;
+  transform: rotate(90deg);
+}
+
+.close-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.modal-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background-color: #f3f4f6;
+}
+
+.modal-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-category-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.25rem;
+  background-color: #22c55e;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-info-content {
+  padding: 1.5rem 1.75rem;
+}
+
+.modal-origin-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.modal-origin-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #22c55e;
+}
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.25;
+}
+
+.modal-price {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #16a34a;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+
+.modal-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin-bottom: 1.25rem;
+}
+
+.modal-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-description {
+  font-size: 0.975rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+  white-space: pre-wrap; /* Agar paragraf instruksi resep terformat dengan rapi */
+}
+
+/* Scrollbar styling untuk Modal agar tetap estetik */
+.modal-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-card::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0 20px 20px 0;
+}
+
+.modal-card::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.modal-card::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive Modal Adjustments */
+@media (max-width: 640px) {
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+  
+  .modal-card {
+    max-height: 95vh;
+    border-radius: 16px;
+  }
+
+  .modal-info-content {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-price {
+    font-size: 1.2rem;
+  }
+  
+  .modal-close-btn {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
