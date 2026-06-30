@@ -28,10 +28,14 @@ import ProtectedRoute from './components/ProtectedRoute';
  *  - CartProvider    : state keranjang belanja (CartContext)
  *
  * Routes (Poin 5 — Navigasi Multi-Halaman dengan React Router):
+ *  /login       → Login      — halaman autentikasi (PUBLIC)
+ *
+ *  Routes berikut memerlukan login (ProtectedRoute tanpa role):
  *  /            → Home       — daftar makanan + pencarian
  *  /detail/:id  → Detail     — detail makanan (useParams untuk ambil ID)
  *  /cart        → Cart       — keranjang belanja
- *  /login       → Login      — halaman autentikasi
+ *
+ *  Routes berikut memerlukan role Admin:
  *  /admin       → Admin      — CRUD makanan (protected: Admin only)
  *  /admin/users → UserAdmin  — CRUD pengguna (protected: Admin only)
  */
@@ -48,17 +52,22 @@ function App() {
                     <Navbar />
                     <main className="flex-1">
                       <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/detail/:id" element={<Detail />} />
-                        <Route path="/cart" element={<Cart />} />
+                        {/* Public — tidak perlu login */}
                         <Route path="/login" element={<Login />} />
-                        
+
+                        {/* Protected — wajib login (semua role) */}
+                        <Route element={<ProtectedRoute />}>
+                          <Route path="/" element={<Home />} />
+                          <Route path="/detail/:id" element={<Detail />} />
+                          <Route path="/cart" element={<Cart />} />
+                          <Route path="*" element={<Home />} />
+                        </Route>
+
+                        {/* Protected — khusus Admin */}
                         <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
                           <Route path="/admin" element={<Admin />} />
                           <Route path="/admin/users" element={<UserAdmin />} />
                         </Route>
-                        
-                        <Route path="*" element={<Home />} />
                       </Routes>
                     </main>
                     <Footer />

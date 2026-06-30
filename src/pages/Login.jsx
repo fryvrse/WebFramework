@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogIn, AlertCircle, UtensilsCrossed } from 'lucide-react';
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Halaman yang ingin dituju sebelum diarahkan ke login
+  const from = location.state?.from?.pathname || '/';
+
+  // Jika sudah login, langsung redirect ke tujuan
+  if (currentUser) return <Navigate to={from} replace />;
 
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
@@ -28,12 +35,12 @@ const Login = () => {
     setTimeout(() => {
       const result = login(formData.email, formData.password);
       if (result.success) {
-        navigate('/'); // Arahkan ke beranda setelah sukses login
+        navigate(from, { replace: true }); // Kembali ke halaman asal
       } else {
         setError(result.message);
         setIsLoading(false);
       }
-    }, 800); // Simulasi delay loading jaringan
+    }, 800);
   };
 
   return (

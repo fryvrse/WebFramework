@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 /**
@@ -11,10 +11,12 @@ import { useAuth } from '../context/AuthContext';
  */
 const ProtectedRoute = ({ allowedRoles }) => {
   const { currentUser } = useAuth();
+  const location = useLocation();
 
   // Jika belum login, arahkan ke halaman Login
+  // Simpan lokasi asal agar setelah login bisa kembali ke sini
   if (!currentUser) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   // Jika ada restriksi role dan role user tidak termasuk, arahkan ke Beranda
